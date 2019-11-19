@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Suguna.Application.Product.Commands.Create;
 using Suguna.Application.Products.Commands.Create;
 using Suguna.Application.Products.Queries.GetProducts;
+using Suguna.Web.Controllers.BaseController;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
@@ -11,7 +13,7 @@ namespace Suguna.Web.Controllers.Product
 {
     [Route("api")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : ApiBaseController
     {
         private readonly IMediator _mediator;
         public ProductController(IMediator mediator)
@@ -31,6 +33,7 @@ namespace Suguna.Web.Controllers.Product
         [Route("product")]
         public async Task<IActionResult> CreateProduct(CreateProductCommand request)
         {
+            request.Initialize(ContextUserId);
             return Ok(await _mediator.Send(request));
         }
     }
