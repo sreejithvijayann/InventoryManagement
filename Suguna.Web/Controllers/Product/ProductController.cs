@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Suguna.Application.Product.Commands.Create;
 using Suguna.Application.Products.Commands.Create;
 using Suguna.Application.Products.Queries.GetProducts;
 using Suguna.Web.Controllers.BaseController;

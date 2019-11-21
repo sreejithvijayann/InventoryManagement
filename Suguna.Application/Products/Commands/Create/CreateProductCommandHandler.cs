@@ -22,10 +22,12 @@ namespace Suguna.Application.Products.Commands.Create
                 CreatedBy = request.UserId,
                 ModifiedBy = request.UserId,
                 ModifiedOn = DateTime.UtcNow,
-                Name = request.Name
+                Name = request.Name,
+                ShortName=request.ShortName
             };
 
             var entry = await _context.AddAsync(product);
+            await _context.SaveChangesAsync();
             return new ResponseDTO()
             {
                 Data = entry.Entity.Guid,
