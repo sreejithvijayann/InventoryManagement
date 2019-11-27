@@ -15,6 +15,7 @@ using MediatR;
 using System.Reflection;
 using Suguna.Persistence.Models;
 using Suguna.Application.Products.Queries.GetProducts;
+using Suguna.Common;
 
 namespace Suguna.Web
 {
@@ -52,6 +53,7 @@ namespace Suguna.Web
 
             services.AddMediatR(typeof(Startup));
             services.AddMediatR(typeof(GetProductsQuery).GetTypeInfo().Assembly);
+            services.AddTransient<ResponseDTO>();
 
             services.AddDbContext<SugunaContext>(options => options.UseSqlServer("Server=.;Database=Suguna;Trusted_Connection=True;"));
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Server=.;Database=Suguna;Trusted_Connection=True;"));

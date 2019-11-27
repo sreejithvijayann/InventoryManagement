@@ -1,10 +1,9 @@
-﻿using MediatR;
-using Suguna.Common;
+﻿using Suguna.Abstraction.Interfaces.Command.Product;
 using System;
 
 namespace Suguna.Application.Products.Commands.Create
 {
-    public class CreateProductCommand : IRequest<ResponseDTO>
+    public class CreateProductCommand : ICreateProduct
     {
         public Guid UserId { get; internal set; }
         public string Name { get; set; }

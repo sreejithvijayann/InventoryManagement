@@ -24,7 +24,7 @@ namespace Suguna.Application.Products.Queries.GetProducts
                 Id = x.Id,
                 Name = x.Name,
                 ShortName = x.ShortName,
-                Price = x.Price.Where(y=>y.CurrentPrice == true).FirstOrDefault().Price1
+                Price = x.Price.Where(y=>y.CurrentPrice == true).FirstOrDefault().Amount
             }).ToListAsync();
         }
     }

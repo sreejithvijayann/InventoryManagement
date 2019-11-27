@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Suguna.Abstraction\Suguna.Abstraction.csproj" />
     <ProjectReference Include="..\Suguna.Common\Suguna.Common.csproj" />
     <ProjectReference Include="..\Suguna.Persistence\Suguna.Persistence.csproj" />
   </ItemGroup>

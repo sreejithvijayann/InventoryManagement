@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Suguna.Persistence.Models
 {
@@ -8,7 +7,7 @@ namespace Suguna.Persistence.Models
         public long Id { get; set; }
         public Guid Guid { get; set; }
         public short ProductId { get; set; }
-        public decimal Price1 { get; set; }
+        public decimal Amount { get; set; }
         public bool CurrentPrice { get; set; }
         public DateTime CreatedOn { get; set; }
         public Guid CreatedBy { get; set; }

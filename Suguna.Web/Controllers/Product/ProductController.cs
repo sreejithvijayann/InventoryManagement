@@ -1,8 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Suguna.Application.Products.Commands.Create;
+using Suguna.Application.Products.Commands.Update;
+using Suguna.Application.Products.Commands.UpdateProductPrice;
 using Suguna.Application.Products.Queries.GetProducts;
+using Suguna.Application.Products.Queries.Search;
+using Suguna.Common;
 using Suguna.Web.Controllers.BaseController;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
@@ -20,6 +25,14 @@ namespace Suguna.Web.Controllers.Product
             _mediator  = mediator;
         }
 
+        [HttpPost]
+        [Route("product")]
+        public async Task<IActionResult> CreateProduct(CreateProductCommand request)
+        {
+            request.Initialize(ContextUserId);
+            return Ok(await _mediator.Send(request));
+        }
+
         [HttpGet]
         [Route("products")]
         public async Task<IActionResult> ReadAllProducts()
@@ -28,12 +41,48 @@ namespace Suguna.Web.Controllers.Product
             return Ok(await _mediator.Send(request));
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("product")]
-        public async Task<IActionResult> CreateProduct(CreateProductCommand request)
+        public async Task<IActionResult> SearchProducts(string search)
         {
-            request.Initialize(ContextUserId);
+            SearchProductsQuery request = new SearchProductsQuery()
+            {
+                Search = search
+            };
             return Ok(await _mediator.Send(request));
+        }
+
+        [HttpPatch]
+        [Route("product")]
+        public async Task<IActionResult> UpdateProduct(UpdateProductCommand request)
+        {
+            try
+            {
+                request.Initialize(ContextUserId);
+                var response = await _mediator.Send(request);
+                return await GetResponseAsync(response);
+            }
+            catch(Exception exp)
+            {
+                throw exp;
+            }
+        }
+
+
+        [HttpPut]
+        [Route("product/price")]
+        public async Task<IActionResult> UpdateProductPrice(UpdateProductPriceCommand request)
+        {
+            try
+            {
+                request.Initialize(ContextUserId);
+                var response = await _mediator.Send(request);
+                return await GetResponseAsync(response);
+            }
+            catch (Exception exp)
+            {
+                throw exp;
+            }
         }
     }
 }

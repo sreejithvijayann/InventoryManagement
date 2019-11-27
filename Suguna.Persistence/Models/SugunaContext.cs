@@ -86,7 +86,7 @@ namespace Suguna.Persistence.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getutcdate())");
 
-                entity.Property(e => e.Price1)
+                entity.Property(e => e.Amount)
                     .HasColumnName("Price")
                     .HasColumnType("money");
 
